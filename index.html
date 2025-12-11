@@ -6,14 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --bg: #0f172a;
+      --bg: #020617;
+      --bg-soft: #0b1220;
       --card: #020617;
       --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.1);
+      --accent2: #a855f7;
+      --accent-soft: rgba(56,189,248,0.08);
+      --accent2-soft: rgba(168,85,247,0.1);
       --text: #e5e7eb;
       --muted: #9ca3af;
       --danger: #f97373;
-      --radius-lg: 18px;
+      --radius-lg: 20px;
     }
 
     * {
@@ -24,7 +27,10 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.09), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(168,85,247,0.15), transparent 55%),
+        linear-gradient(145deg, #020617, #020617);
       color: var(--text);
       display: flex;
       align-items: center;
@@ -34,47 +40,70 @@
 
     .app {
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
     }
 
     .card {
-      background: linear-gradient(145deg, #020617, #030712);
+      background: radial-gradient(circle at top, #020617, #020617 40%, #020617 100%);
       border-radius: var(--radius-lg);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.6);
-      padding: 20px 18px 18px;
-      border: 1px solid rgba(148,163,184,0.2);
+      box-shadow:
+        0 22px 60px rgba(0,0,0,0.75),
+        0 0 0 1px rgba(148,163,184,0.15);
+      padding: 22px 18px 18px;
+      border: 1px solid rgba(148,163,184,0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(56,189,248,0.06), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(168,85,247,0.09), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
     }
 
     @media (min-width: 480px) {
       .card {
-        padding: 24px 22px 22px;
+        padding: 26px 22px 22px;
       }
     }
 
     h1 {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       margin: 0 0 6px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     h1 span.logo {
       display: inline-flex;
-      width: 26px;
-      height: 26px;
+      width: 30px;
+      height: 30px;
       border-radius: 999px;
       background: radial-gradient(circle at 30% 30%, #e5e7eb, #0f172a);
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: #020617;
-      box-shadow: 0 0 12px rgba(56,189,248,0.7);
+      box-shadow:
+        0 0 14px rgba(56,189,248,0.9),
+        0 0 0 2px rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.75);
     }
 
     .subtitle {
-      font-size: 0.85rem;
+      font-size: 0.86rem;
       color: var(--muted);
       margin-bottom: 14px;
     }
@@ -86,9 +115,9 @@
     }
 
     .section-caption {
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       color: var(--muted);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .grid-2 {
@@ -110,23 +139,24 @@
       width: 100%;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.5);
-      background: rgba(15,23,42,0.8);
+      background: rgba(15,23,42,0.9);
       color: var(--text);
       padding: 7px 11px;
       font-size: 0.85rem;
       outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s, transform 0.08s;
     }
 
     input[type="text"] {
-      border-radius: 12px;
+      border-radius: 10px;
     }
 
     input:focus,
     select:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 1px rgba(56,189,248,0.4);
-      background: rgba(15,23,42,0.95);
+      box-shadow: 0 0 0 1px rgba(56,189,248,0.45);
+      background: rgba(15,23,42,1);
+      transform: translateY(-0.5px);
     }
 
     .pill-row {
@@ -140,8 +170,9 @@
       font-size: 0.7rem;
       padding: 4px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.35);
+      border: 1px solid rgba(148,163,184,0.4);
       color: var(--muted);
+      background: rgba(15,23,42,0.9);
     }
 
     .btn {
@@ -155,29 +186,32 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: transform 0.08s ease, box-shadow 0.1s ease, background 0.15s ease;
+      transition: transform 0.08s ease, box-shadow 0.1s ease, background 0.15s ease, border-color 0.15s ease;
       user-select: none;
+      white-space: nowrap;
     }
 
     .btn-primary {
       width: 100%;
-      background: radial-gradient(circle at top, #38bdf8, #0ea5e9);
+      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
       color: #020617;
-      box-shadow: 0 10px 25px rgba(56,189,248,0.5);
+      box-shadow:
+        0 12px 28px rgba(56,189,248,0.55),
+        0 0 0 1px rgba(8,47,73,0.7);
       margin-top: 4px;
     }
 
     .btn-primary:active {
       transform: translateY(1px) scale(0.99);
-      box-shadow: 0 4px 12px rgba(56,189,248,0.45);
+      box-shadow: 0 6px 16px rgba(56,189,248,0.5);
     }
 
     .btn-ghost {
-      background: transparent;
+      background: rgba(15,23,42,0.7);
       border-radius: 999px;
       padding: 6px 10px;
-      border: 1px dashed rgba(148,163,184,0.4);
-      font-size: 0.75rem;
+      border: 1px dashed rgba(148,163,184,0.55);
+      font-size: 0.76rem;
       color: var(--muted);
     }
 
@@ -185,14 +219,23 @@
       transform: translateY(1px);
     }
 
+    .btn-chip {
+      font-size: 0.74rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(56,189,248,0.5);
+      color: var(--accent);
+    }
+
     .hint {
       margin-top: 8px;
       font-size: 0.75rem;
       color: var(--muted);
       padding: 6px 10px;
-      background: rgba(15,23,42,0.9);
+      background: rgba(15,23,42,0.92);
       border-radius: 12px;
-      border: 1px dashed rgba(75,85,99,0.8);
+      border: 1px dashed rgba(75,85,99,0.9);
     }
 
     .hint strong {
@@ -202,9 +245,9 @@
 
     .divider {
       height: 1px;
-      background: radial-gradient(circle, rgba(148,163,184,0.8), transparent);
+      background: radial-gradient(circle, rgba(148,163,184,0.85), transparent);
       margin: 14px 0 10px;
-      opacity: 0.7;
+      opacity: 0.85;
     }
 
     .badge {
@@ -215,7 +258,7 @@
       padding: 3px 8px;
       font-size: 0.7rem;
       border: 1px solid rgba(56,189,248,0.5);
-      background: var(--accent-soft);
+      background: linear-gradient(135deg, var(--accent-soft), rgba(15,23,42,0.9));
       color: var(--accent);
       margin-bottom: 6px;
     }
@@ -226,6 +269,17 @@
       border-radius: 999px;
       background: var(--accent);
       box-shadow: 0 0 6px rgba(56,189,248,0.9);
+    }
+
+    .badge-alt {
+      border-color: rgba(168,85,247,0.7);
+      color: #e9d5ff;
+      background: linear-gradient(135deg, var(--accent2-soft), rgba(15,23,42,0.95));
+    }
+
+    .badge-alt .badge-dot {
+      background: var(--accent2);
+      box-shadow: 0 0 6px rgba(168,85,247,0.9);
     }
 
     .error {
@@ -248,7 +302,7 @@
     }
 
     .player-name {
-      font-size: 1.1rem;
+      font-size: 1.12rem;
       font-weight: 600;
       margin-bottom: 10px;
     }
@@ -260,9 +314,9 @@
       gap: 6px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.4);
-      font-size: 0.75rem;
+      background: rgba(15,23,42,0.94);
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 0.76rem;
       margin-bottom: 10px;
       color: var(--muted);
     }
@@ -279,9 +333,9 @@
       margin: 10px 0 14px;
       padding: 12px 10px;
       border-radius: 14px;
-      background: radial-gradient(circle at top, rgba(15,23,42,0.95), #020617);
-      border: 1px solid rgba(148,163,184,0.5);
-      min-height: 54px;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.97), #020617);
+      border: 1px solid rgba(148,163,184,0.6);
+      min-height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -296,12 +350,12 @@
 
     .role-impostor {
       color: #f97373;
-      text-shadow: 0 0 10px rgba(248,113,113,0.7);
+      text-shadow: 0 0 12px rgba(248,113,113,0.75);
     }
 
     .role-crew {
       color: #4ade80;
-      text-shadow: 0 0 10px rgba(74,222,128,0.7);
+      text-shadow: 0 0 12px rgba(74,222,128,0.75);
     }
 
     .instructions-list {
@@ -321,11 +375,46 @@
       font-size: 0.7rem;
       color: var(--muted);
       text-align: center;
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     .footer-note span {
       color: var(--accent);
+      font-weight: 500;
+    }
+
+    .names-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 6px 10px;
+    }
+
+    @media (max-width: 380px) {
+      .names-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .name-label {
+      margin-bottom: 2px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .history-box {
+      margin-top: 8px;
+    }
+
+    .history-pill {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      margin: 2px 4px 2px 0;
+      color: var(--muted);
     }
   </style>
 </head>
@@ -366,10 +455,23 @@
           </select>
         </div>
 
-        <div style="margin-top: 10px;">
+        <div style="margin-top: 14px;">
+          <div class="section-title">Nombres de jugadores (opcional)</div>
+          <div class="section-caption">
+            Si no completás nada, se usarán nombres genéricos como <strong>“Jugador 1”</strong>, “Jugador 2”, etc.
+          </div>
+          <button class="btn btn-ghost" id="toggle-names" type="button">
+            ✏️ Configurar nombres
+          </button>
+          <div id="names-container" style="margin-top: 8px; display:none;"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="margin-top: 4px;">
           <div class="section-title">Palabra secreta</div>
           <div class="section-caption">
-            Podés usar palabras ya cargadas o definir una propia.
+            Podés usar palabras ya cargadas o definir una propia. El juego evita repetir palabras en este dispositivo.
           </div>
 
           <div class="pill-row">
@@ -381,26 +483,28 @@
 
           <label for="custom-word">Palabra personalizada (opcional)</label>
           <input type="text" id="custom-word" placeholder="Ej: Heladera, Gimnasio, Messi...">
-          <button class="btn btn-ghost" id="clear-custom" type="button">
+          <button class="btn btn-ghost" id="clear-custom" type="button" style="margin-top:4px;">
             Limpiar palabra personalizada
           </button>
         </div>
 
         <button class="btn btn-primary" id="start-btn" type="button">
-          Empezar partida
+          🚀 Empezar partida
         </button>
 
         <div id="config-error" class="error"></div>
 
         <div class="hint">
-          <strong>Cómo se usa:</strong> poné la cantidad de jugadores, elegí cuántos impostores hay,
-          comenzá la partida y pasá el celular jugador por jugador. Cada uno verá su palabra (o si es impostor).
+          <strong>Cómo se usa:</strong> poné la cantidad de jugadores, impostores y (si querés) sus nombres.
+          Empezá la partida y pasá el celular jugador por jugador. Cada uno verá su rol.
         </div>
+
+        <div id="history-info" class="hint history-box"></div>
       </div>
 
       <!-- Pantalla de juego -->
       <div id="game-screen" style="display:none;">
-        <div class="badge" id="badge-turno">
+        <div class="badge badge-alt" id="badge-turno">
           <span class="badge-dot"></span>
           Asignando palabras...
         </div>
@@ -448,7 +552,7 @@
   </div>
 
   <script>
-    // --- Palabras predefinidas (puedes agregar más) ---
+    // --- Palabras predefinidas ---
     const wordPairs = [
       // comida
       { crew: "Pizza", impostor: "Empanada" },
@@ -486,6 +590,72 @@
       "Lámpara"
     ];
 
+    // --- Historial de palabras (localStorage) ---
+    const HISTORY_KEY = "impostorGameWordHistory_v1";
+
+    const wordHistory = {
+      single: [],
+      pairs: []
+    };
+
+    function loadHistory() {
+      try {
+        const raw = localStorage.getItem(HISTORY_KEY);
+        if (!raw) return;
+        const obj = JSON.parse(raw);
+        if (Array.isArray(obj.single)) wordHistory.single = obj.single;
+        if (Array.isArray(obj.pairs)) wordHistory.pairs = obj.pairs;
+      } catch (e) {
+        // ignoramos errores de parseo
+      }
+    }
+
+    function saveHistory() {
+      try {
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(wordHistory));
+      } catch (e) {
+        // puede fallar si el navegador bloquea localStorage, no pasa nada
+      }
+    }
+
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function getNextSingleWord() {
+      const available = singleWords.filter(w => !wordHistory.single.includes(w));
+      if (available.length === 0) {
+        // Se usaron todas las palabras, reiniciamos historial de single
+        wordHistory.single = [];
+        saveHistory();
+        return pickRandom(singleWords);
+      }
+      const w = pickRandom(available);
+      wordHistory.single.push(w);
+      saveHistory();
+      return w;
+    }
+
+    function getNextPair() {
+      const available = wordPairs.filter(p => {
+        const key = p.crew + "|" + p.impostor;
+        return !wordHistory.pairs.includes(key);
+      });
+      if (available.length === 0) {
+        // Se usaron todos los pares, reiniciamos historial de pares
+        wordHistory.pairs = [];
+        saveHistory();
+        const pair = pickRandom(wordPairs);
+        wordHistory.pairs.push(pair.crew + "|" + pair.impostor);
+        saveHistory();
+        return pair;
+      }
+      const pair = pickRandom(available);
+      wordHistory.pairs.push(pair.crew + "|" + pair.impostor);
+      saveHistory();
+      return pair;
+    }
+
     // --- Estado de la partida ---
     const state = {
       totalPlayers: 0,
@@ -494,8 +664,10 @@
       crewWord: "",
       impostorWord: "",
       roles: [], // "crew" | "impostor"
+      playerNames: [],
       currentIndex: 0,
-      hasShownForCurrent: false
+      hasShownForCurrent: false,
+      startingPlayerIndex: null
     };
 
     // --- Utilidades ---
@@ -506,10 +678,6 @@
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
       return arr;
-    }
-
-    function pickRandom(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
     }
 
     // --- DOM elements ---
@@ -524,6 +692,9 @@
     const startBtn = document.getElementById("start-btn");
     const configError = document.getElementById("config-error");
 
+    const toggleNamesBtn = document.getElementById("toggle-names");
+    const namesContainer = document.getElementById("names-container");
+
     const badgeTurno = document.getElementById("badge-turno");
     const playerNameEl = document.getElementById("player-name");
     const statusChip = document.getElementById("status-chip");
@@ -536,11 +707,101 @@
     const restartBtn = document.getElementById("restart-btn");
     const instructionsList = document.getElementById("game-instructions");
     const footerNote = document.getElementById("footer-note");
+    const historyInfo = document.getElementById("history-info");
 
-    // --- Eventos ---
+    // --- Historial visible ---
+    function updateHistoryInfo() {
+      if (!historyInfo) return;
+
+      const lastSingles = wordHistory.single.slice(-3);
+      const lastPairs = wordHistory.pairs.slice(-3).map(key => key.split("|")[0]);
+
+      if (lastSingles.length === 0 && lastPairs.length === 0) {
+        historyInfo.innerHTML = `
+          <strong>Historial de palabras usadas:</strong><br>
+          <span style="font-size:0.75rem; color:var(--muted);">
+            Todavía no se usó ninguna palabra en este dispositivo.
+          </span>
+        `;
+        return;
+      }
+
+      const all = lastPairs.concat(lastSingles);
+      const unique = [...new Set(all)];
+
+      historyInfo.innerHTML = `
+        <strong>Historial de palabras usadas (últimas):</strong><br>
+        ${unique.map(w => `<span class="history-pill">${w}</span>`).join("")}
+      `;
+    }
+
+    // --- Nombres de jugadores ---
+    function buildNameInputs() {
+      const total = parseInt(playersInput.value, 10) || 0;
+      namesContainer.innerHTML = "";
+
+      if (total <= 0) return;
+
+      const grid = document.createElement("div");
+      grid.className = "names-grid";
+
+      for (let i = 0; i < total; i++) {
+        const wrapper = document.createElement("div");
+        const nameIndex = i + 1;
+        wrapper.innerHTML = `
+          <div class="name-label">Jugador ${nameIndex}</div>
+          <input type="text"
+            class="player-name-input"
+            data-index="${i}"
+            placeholder="Nombre del jugador ${nameIndex}">
+        `;
+        grid.appendChild(wrapper);
+      }
+
+      namesContainer.appendChild(grid);
+    }
+
+    function collectPlayerNames(totalPlayers) {
+      const names = [];
+      if (namesContainer.style.display === "none") {
+        for (let i = 0; i < totalPlayers; i++) {
+          names.push(`Jugador ${i + 1}`);
+        }
+        return names;
+      }
+
+      const inputs = namesContainer.querySelectorAll(".player-name-input");
+      for (let i = 0; i < totalPlayers; i++) {
+        const input = inputs[i];
+        let name = input ? input.value.trim() : "";
+        if (!name) name = `Jugador ${i + 1}`;
+        names.push(name);
+      }
+      return names;
+    }
+
+    // --- Eventos configuración ---
     clearCustomBtn.addEventListener("click", () => {
       customWordInput.value = "";
       customWordInput.focus();
+    });
+
+    toggleNamesBtn.addEventListener("click", () => {
+      if (namesContainer.style.display === "none") {
+        namesContainer.style.display = "block";
+        buildNameInputs();
+        toggleNamesBtn.textContent = "🙈 Ocultar nombres";
+      } else {
+        namesContainer.style.display = "none";
+        namesContainer.innerHTML = "";
+        toggleNamesBtn.textContent = "✏️ Configurar nombres";
+      }
+    });
+
+    playersInput.addEventListener("input", () => {
+      if (namesContainer.style.display !== "none") {
+        buildNameInputs();
+      }
     });
 
     startBtn.addEventListener("click", startGame);
@@ -571,24 +832,23 @@
         return;
       }
 
-      // Selección de palabras
+      // Selección de palabras con historial
       let crewWord = "";
       let impostorWord = "";
 
       if (mode === "no-word") {
-        // Todos tienen la misma palabra, impostores no ven nada concreto.
-        crewWord = customWordRaw !== "" ? customWordRaw : pickRandom(singleWords);
-        impostorWord = ""; // no se usa
+        // Todos tienen la misma palabra, impostores no ven palabra concreta.
+        crewWord = customWordRaw !== "" ? customWordRaw : getNextSingleWord();
+        impostorWord = "";
       } else {
         // similar-word: impostor ve palabra relacionada
         if (customWordRaw !== "") {
-          // crew: palabra custom, impostor: palabra random similar-ish (solo para despistar)
           crewWord = customWordRaw;
-          // para impostor usamos una palabra random de la lista similar, sin que sea exactamente la misma
           const pair = pickRandom(wordPairs);
           impostorWord = pair.impostor;
+          // No guardamos en historial porque la palabra principal es custom
         } else {
-          const pair = pickRandom(wordPairs);
+          const pair = getNextPair();
           crewWord = pair.crew;
           impostorWord = pair.impostor;
         }
@@ -603,6 +863,9 @@
         roles.push(impostorIndices.includes(i) ? "impostor" : "crew");
       }
 
+      // Nombres de jugadores
+      const playerNames = collectPlayerNames(totalPlayers);
+
       // Guardar en el estado
       state.totalPlayers = totalPlayers;
       state.impostors = impostors;
@@ -610,8 +873,13 @@
       state.crewWord = crewWord;
       state.impostorWord = impostorWord;
       state.roles = roles;
+      state.playerNames = playerNames;
       state.currentIndex = 0;
       state.hasShownForCurrent = false;
+      state.startingPlayerIndex = null;
+
+      // Actualizamos historial visible
+      updateHistoryInfo();
 
       // Cambiar a pantalla de juego
       configScreen.style.display = "none";
@@ -622,8 +890,9 @@
 
     function updateGameScreenForCurrentPlayer(initial = false) {
       const n = state.currentIndex + 1;
+      const name = state.playerNames[n - 1] || `Jugador ${n}`;
 
-      playerNameEl.textContent = `Jugador ${n}`;
+      playerNameEl.textContent = name;
 
       // Estado inicial: aún no vio su palabra
       state.hasShownForCurrent = false;
@@ -635,25 +904,24 @@
 
       badgeTurno.innerHTML = `
         <span class="badge-dot"></span>
-        Turno del jugador ${n} de ${state.totalPlayers}
+        Turno de ${name} (${n} de ${state.totalPlayers})
       `;
 
       instructionsList.innerHTML = `
-        <li>Pasá el celular al <strong>Jugador ${n}</strong> y que solo él toque <strong>"Ver mi palabra"</strong>.</li>
-        <li>Después de verla, tocá <strong>"Listo, ocultar"</strong> y pasá el celu al siguiente.</li>
+        <li>Pasá el celular a <strong>${name}</strong> y que solo esa persona toque <strong>"Ver mi palabra"</strong>.</li>
+        <li>Después de verla, tocá <strong>"Listo, ocultar"</strong> y pasá el celu al siguiente jugador.</li>
       `;
 
+      const remaining = state.totalPlayers - n;
       footerNote.innerHTML = `
-        Faltan <span>${state.totalPlayers - n}</span> jugador(es) por ver su rol.
+        Faltan <span>${remaining}</span> jugador(es) por ver su rol.
       `;
     }
 
     function handleAction() {
-      // Si aún no mostró la palabra del jugador actual -> mostrar
       if (!state.hasShownForCurrent) {
         showWordForCurrentPlayer();
       } else {
-        // Ya la vio -> pasar al siguiente jugador o terminar
         goToNextPlayerOrEnd();
       }
     }
@@ -704,24 +972,29 @@
       wordContent.style.display = "none";
       statusText.textContent = "Todos tienen su rol.";
 
+      // Elegimos al azar quién empieza la ronda de pistas
+      const starterIndex = Math.floor(Math.random() * state.totalPlayers);
+      state.startingPlayerIndex = starterIndex;
+      const starterName = state.playerNames[starterIndex] || `Jugador ${starterIndex + 1}`;
+
       badgeTurno.innerHTML = `
         <span class="badge-dot"></span>
-        ¡Listo! Empiecen a jugar
+        ¡Listo! Empiezan las pistas
       `;
 
-      playerNameEl.textContent = "Ronda de pistas";
+      playerNameEl.textContent = `Empieza: ${starterName}`;
 
       actionBtn.style.display = "none";
       restartBtn.textContent = "Nueva partida";
 
       instructionsList.innerHTML = `
-        <li>Cada jugador, en orden, debe dar una <strong>pista corta</strong> relacionada con su palabra.</li>
-        <li>No digas la palabra exacta ni algo demasiado obvio.</li>
-        <li>Después de una ronda de pistas, voten quién creen que es el impostor.</li>
+        <li>Comienza <strong>${starterName}</strong> dando una pista corta relacionada con su palabra.</li>
+        <li>Luego siguen los demás jugadores en sentido horario o el orden que prefieran.</li>
+        <li>Después de una o varias rondas de pistas, voten quién creen que es el impostor.</li>
       `;
 
       footerNote.innerHTML = `
-        Tip: Podés hacer varias rondas de pistas antes de votar para hacerlo más difícil 🔥
+        Tip: podés cambiar quién empieza en cada partida para hacerlo más divertido 🔥
       `;
     }
 
@@ -733,8 +1006,10 @@
       state.crewWord = "";
       state.impostorWord = "";
       state.roles = [];
+      state.playerNames = [];
       state.currentIndex = 0;
       state.hasShownForCurrent = false;
+      state.startingPlayerIndex = null;
 
       // Reset UI
       actionBtn.style.display = "inline-flex";
@@ -744,7 +1019,15 @@
       configError.textContent = "";
       configScreen.style.display = "block";
       gameScreen.style.display = "none";
+
+      // Los inputs quedan como estaban para armar rápido otra partida
     }
+
+    // --- Inicialización ---
+    loadHistory();
+    updateHistoryInfo();
   </script>
 </body>
 </html>
+
+
