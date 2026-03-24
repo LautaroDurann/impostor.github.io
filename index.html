@@ -6,36 +6,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --bg: #020617;
-      --bg-soft: #0b1220;
-      --card: #020617;
-      --accent: #38bdf8;
-      --accent2: #a855f7;
-      --accent-soft: rgba(56,189,248,0.08);
-      --accent2-soft: rgba(168,85,247,0.1);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --danger: #f97373;
-      --radius-lg: 20px;
+      --bg: #08060a;
+      --bg-soft: #231517;
+      --card: #211013;
+      --accent: #ffd100;
+      --accent2: #ff3b81;
+      --accent-soft: rgba(255,209,0,0.3);
+      --accent2-soft: rgba(255,59,129,0.25);
+      --text: #fff8d4;
+      --muted: #e4c8a8;
+      --danger: #ff5946;
+      --radius-lg: 18px;
+      --sparkle: #fff300;
     }
 
     * {
       box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: "Inter", "Poppins", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    @keyframes pulse-bg {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top left, rgba(56,189,248,0.09), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(168,85,247,0.15), transparent 55%),
-        linear-gradient(145deg, #020617, #020617);
+      background: linear-gradient(135deg, #100204 0%, #0b0204 45%, #1a0708 100%);
+      background-size: 200% 200%;
+      animation: pulse-bg 12s ease infinite;
       color: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 16px;
+      font-family: "Söhne", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
     .app {
@@ -44,15 +51,37 @@
     }
 
     .card {
-      background: radial-gradient(circle at top, #020617, #020617 40%, #020617 100%);
+      background: radial-gradient(circle at 30% 25%, rgba(255, 213, 51, 0.1), rgba(40, 14, 19, 0.96) 65%);
       border-radius: var(--radius-lg);
+      border: 2px solid rgba(255, 209, 0, 0.85);
       box-shadow:
-        0 22px 60px rgba(0,0,0,0.75),
-        0 0 0 1px rgba(148,163,184,0.15);
-      padding: 22px 18px 18px;
-      border: 1px solid rgba(148,163,184,0.25);
+        0 20px 40px rgba(0, 0, 0, 0.55),
+        0 0 20px rgba(255, 209, 0, 0.6),
+        inset 0 0 18px rgba(255, 209, 0, 0.3);
+      padding: 22px 20px 20px;
       position: relative;
       overflow: hidden;
+      animation: card-float 6s ease-in-out infinite;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: 0 0 0 4px rgba(255, 209, 0, 0.4);
+      pointer-events: none;
+      animation: glow-lights 2.5s linear infinite;
+    }
+
+    @keyframes glow-lights {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(255, 209, 0, 0.4); }
+      50% { box-shadow: 0 0 0 4px rgba(255, 59, 129, 0.9); }
+    }
+
+    @keyframes card-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
     .card::before {
@@ -60,12 +89,17 @@
       position: absolute;
       inset: -40%;
       background:
-        radial-gradient(circle at 0% 0%, rgba(56,189,248,0.06), transparent 55%),
-        radial-gradient(circle at 100% 100%, rgba(168,85,247,0.09), transparent 60%);
-      opacity: 0.9;
+        radial-gradient(circle at 10% 10%, rgba(255,31,63,0.22), transparent 55%),
+        radial-gradient(circle at 90% 90%, rgba(214,61,80,0.18), transparent 60%);
+      opacity: 0.95;
       pointer-events: none;
+      animation: pulse-glow 6s ease-in-out infinite;
     }
 
+    @keyframes pulse-glow {
+      0%,100% { opacity: 0.9; }
+      50% { opacity: 1; transform: scale(1.02);}  
+    }
     .card > * {
       position: relative;
       z-index: 1;
@@ -78,34 +112,172 @@
     }
 
     h1 {
-      font-size: 1.45rem;
-      margin: 0 0 6px;
+      font-family: "Luckiest Guy", "Bangers", "Inter", sans-serif;
+      font-size: 1.8rem;
+      margin: 0 0 10px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      color: #fffaea;
+      text-shadow: 
+        0 0 16px rgba(255, 225, 30, 0.9),
+        0 0 20px rgba(255, 49, 92, 0.55);
+      letter-spacing: 0.06em;
+      padding: 4px 8px;
+      border: 1px solid rgba(255, 229, 67, 0.8);
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(0,0,0,0.35), rgba(77, 8, 12, 0.7));
+      box-shadow: 0 0 14px rgba(255, 209, 0, 0.45);
     }
 
     h1 span.logo {
       display: inline-flex;
-      width: 30px;
-      height: 30px;
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #e5e7eb, #0f172a);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 44, 67, 1), rgba(114, 7, 16, 1));
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 0.95rem;
-      color: #020617;
+      font-size: 1rem;
+      color: #fff;
       box-shadow:
-        0 0 14px rgba(56,189,248,0.9),
-        0 0 0 2px rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.75);
+        0 0 18px rgba(255, 31, 63, 0.95),
+        0 0 0 2px rgba(255, 31, 63, 0.5);
+      border: 1px solid rgba(255, 31, 63, 0.8);
+      animation: pulse-border 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse-border {
+      0%,100% { box-shadow: 0 0 18px rgba(255, 31, 63, 0.95), 0 0 0 2px rgba(255, 31, 63, 0.5); }
+      50% { box-shadow: 0 0 30px rgba(255, 31, 63, 1), 0 0 0 2px rgba(255, 31, 63, 0.8); }
+    }
+
+    .symbol-row {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+      letter-spacing: 0.09em;
+      text-shadow: 0 0 10px rgba(255, 205, 0, 0.9);
+      color: #ffe875;
+      animation: glow-emoji 2.8s infinite;
+    }
+
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(255, 209, 0, 0.8);
+      background: linear-gradient(90deg, rgba(34,5,8,0.9), rgba(73,10,16,0.9));
+      border-radius: 999px;
+      padding: 5px 0;
+      margin-bottom: 10px;
+      box-shadow: 0 0 18px rgba(255, 209, 0, 0.65);
+    }
+
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      color: #ffeb99;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .sound-toggle-row {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .sound-toggle-row .btn {
+      letter-spacing: 0.05em;
+      border-color: rgba(255, 209, 0, 0.8);
+    }
+
+    .lights-ring {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .lights-ring .lights-row,
+    .lights-ring .lights-column {
+      position: absolute;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    .lights-ring .lights-row.top {
+      top: -14px;
+      left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .lights-ring .lights-row.bottom {
+      bottom: -14px;
+      left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .lights-ring .lights-column {
+      flex-direction: column;
+      height: calc(100% + 28px);
+      width: auto;
+    }
+
+    .lights-ring .lights-column.left {
+      left: -14px;
+      top: -14px;
+      justify-content: flex-start;
+    }
+
+    .lights-ring .lights-column.right {
+      right: -14px;
+      top: -14px;
+      justify-content: flex-start;
+    }
+
+    .lights-ring .light {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 50%, #fffce3, #ffd800 40%, #ff3777 95%);
+      box-shadow: 0 0 8px rgba(255, 213, 0, 0.9), 0 0 5px rgba(255, 61, 130, 0.6);
+      animation: flash-light 2.2s calc(var(--i) * 0.1s) infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes flash-light {
+      0%, 30%, 100% { opacity: 0.6; transform: translateY(0) scale(0.9); }
+      45%, 70% { opacity: 1; transform: translateY(-2px) scale(1.1); }
+    }
+
+    @keyframes glow-emoji {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-2px); }
     }
 
     .subtitle {
       font-size: 0.86rem;
       color: var(--muted);
       margin-bottom: 14px;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 209, 0, 0.25);
+      padding: 6px 10px;
+      background: rgba(29,13,20,0.55);
     }
 
     .section-title {
@@ -193,26 +365,73 @@
 
     .btn-primary {
       width: 100%;
-      background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-      color: #020617;
+      background: linear-gradient(135deg, #ffc700, #ff2e8a);
+      color: #1a070f;
       box-shadow:
-        0 12px 28px rgba(56,189,248,0.55),
-        0 0 0 1px rgba(8,47,73,0.7);
+        0 6px 18px rgba(255, 209, 0, 0.7),
+        0 0 0 1px rgba(250, 240, 95, 0.9);
       margin-top: 4px;
+      padding: 10px 16px;
+      transition: transform 0.1s ease, box-shadow 0.15s ease, filter 0.15s ease;
+      border: 1px solid rgba(245, 231, 81, 0.95);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+      text-shadow: 0 0 12px rgba(255, 209, 0, 0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0) 60%);
+      opacity: 0;
+      transform: translateX(-100%);
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .btn-primary:hover::before {
+      opacity: 0.18;
+      transform: translateX(0%);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.07);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(255, 209, 0, 0.85), 0 0 0 2px rgba(255, 209, 0, 0.95);
     }
 
     .btn-primary:active {
-      transform: translateY(1px) scale(0.99);
-      box-shadow: 0 6px 16px rgba(56,189,248,0.5);
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 5px 14px rgba(255, 209, 0, 0.6);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(255,31,63,0.75), 0 0 0 1px rgba(255,31,63,0.9);
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 8px 22px rgba(255,31,63,0.55);
     }
 
     .btn-ghost {
-      background: rgba(15,23,42,0.7);
+      background: rgba(30,12,14,0.76);
       border-radius: 999px;
       padding: 6px 10px;
-      border: 1px dashed rgba(148,163,184,0.55);
+      border: 1px dashed rgba(255, 31, 63, 0.6);
       font-size: 0.76rem;
-      color: var(--muted);
+      color: #f9c7c8;
+      transition: transform 0.15s ease, background 0.15s;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(30,12,14,0.88);
+      transform: translateY(-1px);
     }
 
     .btn-ghost:active {
@@ -257,10 +476,51 @@
       border-radius: 999px;
       padding: 3px 8px;
       font-size: 0.7rem;
-      border: 1px solid rgba(56,189,248,0.5);
-      background: linear-gradient(135deg, var(--accent-soft), rgba(15,23,42,0.9));
-      color: var(--accent);
+      border: 1px solid rgba(255, 209, 0, 0.8);
+      background: linear-gradient(135deg, rgba(255, 209, 0, 0.25), rgba(255, 72, 121, 0.28));
+      color: #ffff85;
       margin-bottom: 6px;
+      box-shadow: 0 0 12px rgba(255,235,125,0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .config-progress {
+      margin: 10px 0 12px;
+      font-size: 0.78rem;
+      color: #ff99aa;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+
+    .config-step {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .config-step.active {
+      display: block;
+    }
+
+    .config-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .config-nav .btn {
+      flex: 1;
+    }
+
+    .config-step .label-strong {
+      color: #ffd8dc;
+      font-weight: 700;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .badge-dot {
@@ -314,11 +574,18 @@
       gap: 6px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.94);
-      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(117, 17, 23, 0.82);
+      border: 1px solid rgba(255, 31, 63,0.8);
       font-size: 0.76rem;
       margin-bottom: 10px;
-      color: var(--muted);
+      color: #ffe8eb;
+      box-shadow: 0 0 12px rgba(255, 31, 63, 0.4);
+      animation: glow-status 1.5s ease-in-out infinite;
+    }
+
+    @keyframes glow-status {
+      0%,100% { box-shadow: 0 0 10px rgba(255, 31, 63, 0.4); }
+      50% { box-shadow: 0 0 18px rgba(255, 31, 63, 0.75); }
     }
 
     .status-chip span.dot {
@@ -331,14 +598,22 @@
 
     .word-box {
       margin: 10px 0 14px;
-      padding: 12px 10px;
+      padding: 14px 12px;
       border-radius: 14px;
-      background: radial-gradient(circle at top, rgba(15,23,42,0.97), #020617);
-      border: 1px solid rgba(148,163,184,0.6);
+      background: radial-gradient(circle at top, rgba(30,11,16,0.95), rgba(13,5,8,0.9));
+      border: 1px solid rgba(255, 209, 0, 0.8);
+      box-shadow:
+        0 0 12px rgba(255, 209, 0, 0.53),
+        inset 0 0 8px rgba(255, 255, 255, 0.15);
       min-height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: transform 0.2s ease;
+    }
+
+    .word-box:hover {
+      transform: translateY(-2px);
     }
 
     .word-text {
@@ -349,13 +624,19 @@
     }
 
     .role-impostor {
-      color: #f97373;
-      text-shadow: 0 0 12px rgba(248,113,113,0.75);
+      color: #ffb3c2;
+      text-shadow: 0 0 16px rgba(255, 31, 63, 0.95);
+      animation: pulse-role 1.6s ease-in-out infinite;
     }
 
     .role-crew {
-      color: #4ade80;
-      text-shadow: 0 0 12px rgba(74,222,128,0.75);
+      color: #ffdfe3;
+      text-shadow: 0 0 10px rgba(255, 31, 63, 0.75);
+    }
+
+    @keyframes pulse-role {
+      0%,100% { text-shadow: 0 0 16px rgba(255, 31, 63, 0.95); transform: scale(1); }
+      50% { text-shadow: 0 0 24px rgba(255, 31, 63, 1); transform: scale(1.02); }
     }
 
     .instructions-list {
@@ -411,20 +692,95 @@
       font-size: 0.7rem;
       padding: 3px 8px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.5);
+      background: linear-gradient(135deg, rgba(255, 207, 0, 0.2), rgba(255, 34, 94, 0.2));
+      border: 1px solid rgba(255, 209, 0, 0.5);
       margin: 2px 4px 2px 0;
-      color: var(--muted);
+      color: #fff6a8;
+      box-shadow: 0 0 10px rgba(255, 209, 0, 0.35);
+    }
+
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 12px;
+      opacity: 0.9;
+      transform-origin: center;
+      will-change: transform, opacity;
+      border-radius: 2px;
+      animation: confetti-fall 2s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(900deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
   <div class="app">
     <div class="card">
+      <div class="lights-ring" aria-hidden="true">
+        <div class="lights-row top">
+          <span class="light" style="--i:0;"></span>
+          <span class="light" style="--i:1;"></span>
+          <span class="light" style="--i:2;"></span>
+          <span class="light" style="--i:3;"></span>
+          <span class="light" style="--i:4;"></span>
+          <span class="light" style="--i:5;"></span>
+          <span class="light" style="--i:6;"></span>
+          <span class="light" style="--i:7;"></span>
+        </div>
+        <div class="lights-row bottom">
+          <span class="light" style="--i:8;"></span>
+          <span class="light" style="--i:9;"></span>
+          <span class="light" style="--i:10;"></span>
+          <span class="light" style="--i:11;"></span>
+          <span class="light" style="--i:12;"></span>
+          <span class="light" style="--i:13;"></span>
+          <span class="light" style="--i:14;"></span>
+          <span class="light" style="--i:15;"></span>
+        </div>
+        <div class="lights-column left">
+          <span class="light" style="--i:16;"></span>
+          <span class="light" style="--i:17;"></span>
+          <span class="light" style="--i:18;"></span>
+          <span class="light" style="--i:19;"></span>
+          <span class="light" style="--i:20;"></span>
+          <span class="light" style="--i:21;"></span>
+        </div>
+        <div class="lights-column right">
+          <span class="light" style="--i:22;"></span>
+          <span class="light" style="--i:23;"></span>
+          <span class="light" style="--i:24;"></span>
+          <span class="light" style="--i:25;"></span>
+          <span class="light" style="--i:26;"></span>
+          <span class="light" style="--i:27;"></span>
+        </div>
+      </div>
       <h1>
-        <span class="logo">I?</span>
+        <span class="logo">🎰</span>
         Juego del Impostor
       </h1>
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-content">🎲 BRILLA EN LA SALA DE JUEGO 🎲 // 🎰 GIRA, ADIVINA, ACUSA 🎰 // 💰 EL MEJOR JUEGO DE GRUPO 💰</div>
+      </div>
+      <div class="sound-toggle-row">
+        <button class="btn btn-ghost" id="sound-toggle" type="button">🔈 Sonido: ON</button>
+      </div>
+      <div class="symbol-row">
+        <span>💎</span><span>♠️</span><span>♥️</span><span>♦️</span><span>♣️</span><span>✨</span><span>🍒</span><span>7️⃣</span>
+      </div>
       <div class="subtitle">
         Palabra secreta para todos... menos para uno (o varios) 👀
       </div>
@@ -436,67 +792,85 @@
           Configuración rápida
         </div>
 
-        <div class="grid-2">
+        <div class="config-progress">
+          Paso <span id="current-step">1</span> de 4
+        </div>
+
+        <div id="step-1" class="config-step active">
+          <div class="grid-2">
+            <div>
+              <label for="players">Cantidad de jugadores</label>
+              <input type="number" id="players" min="3" max="20" value="6">
+            </div>
+            <div>
+              <label for="impostors">Impostores</label>
+              <input type="number" id="impostors" min="1" max="5" value="1">
+            </div>
+          </div>
+          <div class="hint" style="margin-top: 10px;">
+            Empieza definiendo cuántos participan y cuántos impostores habrá en el juego.
+          </div>
+        </div>
+
+        <div id="step-2" class="config-step">
+          <div class="section-title">Nombres de jugadores</div>
+          <div class="section-caption">Completa cada jugador para hacerlo más personal.</div>
+          <div id="names-inputs" class="names-grid"></div>
+          <div class="hint">Si dejás campos vacíos se usarán nombres genéricos.</div>
+        </div>
+
+        <div id="step-3" class="config-step">
           <div>
-            <label for="players">Cantidad de jugadores</label>
-            <input type="number" id="players" min="3" max="20" value="6">
+            <label for="category">Categoría de palabra</label>
+            <select id="category">
+              <option value="random">Aleatorio</option>
+              <option value="comida">Comida</option>
+              <option value="lugares">Lugares</option>
+              <option value="objetos">Objetos</option>
+              <option value="personajes">Personajes</option>
+              <option value="animales">Animales</option>
+              <option value="tecnologia">Tecnología</option>
+            </select>
           </div>
-          <div>
-            <label for="impostors">Impostores</label>
-            <input type="number" id="impostors" min="1" max="5" value="1">
+          <div style="margin-top: 10px;">
+            <label for="mode">Modo de impostor</label>
+            <select id="mode">
+              <option value="no-word">Sin palabra (no ve nada)</option>
+              <option value="similar-word" selected>Palabra parecida</option>
+            </select>
           </div>
+          <div class="hint" style="margin-top: 10px;">Con "palabra parecida" el impostor verá un candidato relacionado, pero menos parecido.</div>
         </div>
 
-        <div style="margin-top: 10px;">
-          <label for="mode">Modo de impostor</label>
-          <select id="mode">
-            <option value="no-word">Sin palabra (no ve nada)</option>
-            <option value="similar-word" selected>Palabra parecida</option>
-          </select>
-        </div>
-
-        <div style="margin-top: 14px;">
-          <div class="section-title">Nombres de jugadores (opcional)</div>
-          <div class="section-caption">
-            Si no completás nada, se usarán nombres genéricos como <strong>“Jugador 1”</strong>, “Jugador 2”, etc.
-          </div>
-          <button class="btn btn-ghost" id="toggle-names" type="button">
-            ✏️ Configurar nombres
-          </button>
-          <div id="names-container" style="margin-top: 8px; display:none;"></div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div style="margin-top: 4px;">
+        <div id="step-4" class="config-step">
           <div class="section-title">Palabra secreta</div>
-          <div class="section-caption">
-            Podés usar palabras ya cargadas o definir una propia. El juego evita repetir palabras en este dispositivo.
-          </div>
-
-          <div class="pill-row">
-            <span class="pill">🍕 comida</span>
-            <span class="pill">🎬 cine</span>
-            <span class="pill">🌎 lugares</span>
-            <span class="pill">🎮 random</span>
-          </div>
-
+          <div class="section-caption">Podés ingresar una palabra personalizada o dejar que el juego elija automáticamente.</div>
           <label for="custom-word">Palabra personalizada (opcional)</label>
           <input type="text" id="custom-word" placeholder="Ej: Heladera, Gimnasio, Messi...">
           <button class="btn btn-ghost" id="clear-custom" type="button" style="margin-top:4px;">
             Limpiar palabra personalizada
           </button>
+          <div class="pill-row" style="margin-top: 8px;">
+            <span class="pill">🍕 comida</span>
+            <span class="pill">🌎 lugares</span>
+            <span class="pill">🎮 aleatorio</span>
+            <span class="pill">👤 personajes</span>
+          </div>
         </div>
 
-        <button class="btn btn-primary" id="start-btn" type="button">
+        <div class="config-nav">
+          <button class="btn btn-ghost" id="prev-step" type="button" style="visibility:hidden;">← Anterior</button>
+          <button class="btn btn-primary" id="next-step" type="button">Siguiente →</button>
+        </div>
+
+        <button class="btn btn-primary" id="start-btn" type="button" style="display:none; margin-top: 8px;">
           🚀 Empezar partida
         </button>
 
         <div id="config-error" class="error"></div>
 
         <div class="hint">
-          <strong>Cómo se usa:</strong> poné la cantidad de jugadores, impostores y (si querés) sus nombres.
-          Empezá la partida y pasá el celular jugador por jugador. Cada uno verá su rol.
+          <strong>Cómo se usa:</strong> avanzá por pasos y configurá el juego de forma más inmersiva.
         </div>
 
         <div id="history-info" class="hint history-box"></div>
@@ -555,26 +929,51 @@
     // --- Palabras predefinidas ---
     const wordPairs = [
       // comida
-      { crew: "Pizza", impostor: "Empanada" },
-      { crew: "Café", impostor: "Té" },
-      { crew: "Hamburguesa", impostor: "Lomito" },
-      { crew: "Manzana", impostor: "Pera" },
-      { crew: "Helado", impostor: "Yogur" },
-      { crew: "Pancho", impostor: "Hamburguesa" },
+      { crew: "Pizza", impostor: "Sushi", category: "comida" },
+      { crew: "Hamburguesa", impostor: "Hot dog", category: "comida" },
+      { crew: "Helado", impostor: "Yogur", category: "comida" },
+      { crew: "Pasta", impostor: "Arroz", category: "comida" },
+      { crew: "Manzana", impostor: "Naranja", category: "comida" },
+      { crew: "Empanada", impostor: "Arepa", category: "comida" },
+      { crew: "Café", impostor: "Mate", category: "comida" },
+      { crew: "Té", impostor: "Chocolate", category: "comida" },
+
       // lugares
-      { crew: "Playa", impostor: "Piscina" },
-      { crew: "Escuela", impostor: "Universidad" },
-      { crew: "Gimnasio", impostor: "Cancha" },
-      { crew: "Supermercado", impostor: "Kiosco" },
-      // cosas random
-      { crew: "Celular", impostor: "Tablet" },
-      { crew: "Auto", impostor: "Camioneta" },
-      { crew: "Silla", impostor: "Sillón" },
-      { crew: "Teclado", impostor: "Mouse" },
-      // personas / personajes
-      { crew: "Messi", impostor: "Cristiano" },
-      { crew: "Batman", impostor: "Superman" },
-      { crew: "Doctor", impostor: "Enfermero" }
+      { crew: "Playa", impostor: "Piscina", category: "lugares" },
+      { crew: "Montaña", impostor: "Colina", category: "lugares" },
+      { crew: "Ciudad", impostor: "Pueblo", category: "lugares" },
+      { crew: "Aeropuerto", impostor: "Estación de tren", category: "lugares" },
+      { crew: "Universidad", impostor: "Escuela", category: "lugares" },
+      { crew: "Museo", impostor: "Galería", category: "lugares" },
+
+      // objetos
+      { crew: "Celular", impostor: "Tablet", category: "objetos" },
+      { crew: "Televisor", impostor: "Proyector", category: "objetos" },
+      { crew: "Silla", impostor: "Sillón", category: "objetos" },
+      { crew: "Reloj", impostor: "Alarma", category: "objetos" },
+      { crew: "Lámpara", impostor: "Faro", category: "objetos" },
+      { crew: "Teclado", impostor: "Mouse", category: "objetos" },
+
+      // personajes
+      { crew: "Messi", impostor: "Ronaldo", category: "personajes" },
+      { crew: "Batman", impostor: "Superman", category: "personajes" },
+      { crew: "Doctor", impostor: "Enfermero", category: "personajes" },
+      { crew: "Sherlock", impostor: "Watson", category: "personajes" },
+      { crew: "Mickey", impostor: "Donald", category: "personajes" },
+
+      // animales
+      { crew: "Perro", impostor: "Lobo", category: "animales" },
+      { crew: "Gato", impostor: "Pantera", category: "animales" },
+      { crew: "Ave", impostor: "Pájaro", category: "animales" },
+      { crew: "Tigre", impostor: "León", category: "animales" },
+      { crew: "Caballo", impostor: "Burro", category: "animales" },
+
+      // tecnología
+      { crew: "Computadora", impostor: "Laptop", category: "tecnologia" },
+      { crew: "Auriculares", impostor: "Parlantes", category: "tecnologia" },
+      { crew: "Robot", impostor: "Dron", category: "tecnologia" },
+      { crew: "Impresora", impostor: "Escáner", category: "tecnologia" },
+      { crew: "Consola", impostor: "Control", category: "tecnologia" }
     ];
 
     const singleWords = [
@@ -587,7 +986,17 @@
       "Ventana",
       "Auriculares",
       "Cama",
-      "Lámpara"
+      "Lámpara",
+      "Montaña",
+      "Ciudad",
+      "Helado",
+      "Pizza",
+      "Piscina",
+      "Estadio",
+      "Música",
+      "Libro",
+      "Nave",
+      "Robots"
     ];
 
     // --- Historial de palabras (localStorage) ---
@@ -636,20 +1045,27 @@
       return w;
     }
 
-    function getNextPair() {
-      const available = wordPairs.filter(p => {
+    function getNextPair(category = "random") {
+      let pool = category === "random" ? wordPairs : wordPairs.filter(p => p.category === category);
+      if (pool.length === 0) {
+        pool = wordPairs;
+      }
+
+      const available = pool.filter(p => {
         const key = p.crew + "|" + p.impostor;
         return !wordHistory.pairs.includes(key);
       });
+
       if (available.length === 0) {
-        // Se usaron todos los pares, reiniciamos historial de pares
+        // Se usaron todos los pares de esta categoría o del conjunto.
         wordHistory.pairs = [];
         saveHistory();
-        const pair = pickRandom(wordPairs);
+        const pair = pickRandom(pool);
         wordHistory.pairs.push(pair.crew + "|" + pair.impostor);
         saveHistory();
         return pair;
       }
+
       const pair = pickRandom(available);
       wordHistory.pairs.push(pair.crew + "|" + pair.impostor);
       saveHistory();
@@ -686,14 +1102,19 @@
 
     const playersInput = document.getElementById("players");
     const impostorsInput = document.getElementById("impostors");
+    const categorySelect = document.getElementById("category");
     const modeSelect = document.getElementById("mode");
     const customWordInput = document.getElementById("custom-word");
     const clearCustomBtn = document.getElementById("clear-custom");
     const startBtn = document.getElementById("start-btn");
+    const nextStepBtn = document.getElementById("next-step");
+    const prevStepBtn = document.getElementById("prev-step");
+    const currentStepText = document.getElementById("current-step");
     const configError = document.getElementById("config-error");
+    const namesInputsContainer = document.getElementById("names-inputs");
 
-    const toggleNamesBtn = document.getElementById("toggle-names");
-    const namesContainer = document.getElementById("names-container");
+    const toggleNamesBtn = null;
+    const namesContainer = null;
 
     const badgeTurno = document.getElementById("badge-turno");
     const playerNameEl = document.getElementById("player-name");
@@ -708,6 +1129,79 @@
     const instructionsList = document.getElementById("game-instructions");
     const footerNote = document.getElementById("footer-note");
     const historyInfo = document.getElementById("history-info");
+    const soundToggleBtn = document.getElementById("sound-toggle");
+
+    let soundEnabled = true;
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playBeep(frequency, length = 0.12, type = "sine") {
+      if (!soundEnabled) return;
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = type;
+      osc.frequency.value = frequency;
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.25, audioContext.currentTime + 0.01);
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + length);
+      osc.stop(audioContext.currentTime + length + 0.01);
+    }
+
+    function playChipSound() {
+      playBeep(370, 0.08, "square");
+      setTimeout(() => playBeep(467, 0.08, "triangle"), 90);
+    }
+
+    function playRevealSound() {
+      playBeep(520, 0.12, "sine");
+      setTimeout(() => playBeep(640, 0.07, "sine"), 120);
+    }
+
+    soundToggleBtn.addEventListener("click", () => {
+      soundEnabled = !soundEnabled;
+      soundToggleBtn.textContent = soundEnabled ? "🔈 Sonido: ON" : "🔇 Sonido: OFF";
+      if (!soundEnabled) audioContext.suspend();
+      else audioContext.resume();
+    });
+
+    function createConfetti() {
+      const container = document.createElement("div");
+      container.className = "confetti";
+      document.body.appendChild(container);
+
+      const colors = ["#ffe85b", "#ff3c77", "#f4ff50", "#ff9e2c", "#32ffe3"];
+      const count = 60;
+
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement("div");
+        piece.className = "confetti-piece";
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.top = `${-20 - Math.random() * 20}px`;
+        piece.style.width = `${Math.random() * 8 + 6}px`;
+        piece.style.height = `${Math.random() * 12 + 8}px`;
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = `${Math.random() * 0.8}s`;
+        piece.style.animationDuration = `${1.85 + Math.random() * 1.2}s`;
+        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+        container.appendChild(piece);
+
+        piece.addEventListener("animationend", () => {
+          piece.remove();
+        });
+      }
+
+      setTimeout(() => container.remove(), 2800);
+    }
+
+    function launchConfetti() {
+      if (!soundEnabled) return;
+      createConfetti();
+      playBeep(650, 0.04, "square");
+      setTimeout(() => playBeep(720, 0.04, "square"), 60);
+      setTimeout(() => playBeep(780, 0.04, "square"), 120);
+    }
 
     // --- Historial visible ---
     function updateHistoryInfo() {
@@ -738,7 +1232,7 @@
     // --- Nombres de jugadores ---
     function buildNameInputs() {
       const total = parseInt(playersInput.value, 10) || 0;
-      namesContainer.innerHTML = "";
+      namesInputsContainer.innerHTML = "";
 
       if (total <= 0) return;
 
@@ -758,19 +1252,12 @@
         grid.appendChild(wrapper);
       }
 
-      namesContainer.appendChild(grid);
+      namesInputsContainer.appendChild(grid);
     }
 
     function collectPlayerNames(totalPlayers) {
       const names = [];
-      if (namesContainer.style.display === "none") {
-        for (let i = 0; i < totalPlayers; i++) {
-          names.push(`Jugador ${i + 1}`);
-        }
-        return names;
-      }
-
-      const inputs = namesContainer.querySelectorAll(".player-name-input");
+      const inputs = namesInputsContainer.querySelectorAll(".player-name-input");
       for (let i = 0; i < totalPlayers; i++) {
         const input = inputs[i];
         let name = input ? input.value.trim() : "";
@@ -780,28 +1267,67 @@
       return names;
     }
 
+    let configStep = 1;
+    const totalSteps = 4;
+
+    function showConfigStep(step) {
+      configStep = Math.max(1, Math.min(step, totalSteps));
+      currentStepText.textContent = configStep;
+
+      for (let i = 1; i <= totalSteps; i++) {
+        const section = document.getElementById(`step-${i}`);
+        if (!section) continue;
+        section.classList.toggle("active", i === configStep);
+      }
+
+      prevStepBtn.style.visibility = configStep === 1 ? "hidden" : "visible";
+      nextStepBtn.style.display = configStep === totalSteps ? "none" : "inline-flex";
+      startBtn.style.display = configStep === totalSteps ? "inline-flex" : "none";
+
+      if (configStep === 2) {
+        buildNameInputs();
+      }
+    }
+
+    showConfigStep(1);
+
     // --- Eventos configuración ---
     clearCustomBtn.addEventListener("click", () => {
       customWordInput.value = "";
       customWordInput.focus();
     });
 
-    toggleNamesBtn.addEventListener("click", () => {
-      if (namesContainer.style.display === "none") {
-        namesContainer.style.display = "block";
+    playersInput.addEventListener("input", () => {
+      if (configStep === 2) {
         buildNameInputs();
-        toggleNamesBtn.textContent = "🙈 Ocultar nombres";
-      } else {
-        namesContainer.style.display = "none";
-        namesContainer.innerHTML = "";
-        toggleNamesBtn.textContent = "✏️ Configurar nombres";
       }
     });
 
-    playersInput.addEventListener("input", () => {
-      if (namesContainer.style.display !== "none") {
+    nextStepBtn.addEventListener("click", () => {
+      configError.textContent = "";
+      if (configStep === 1) {
+        const totalPlayers = parseInt(playersInput.value, 10);
+        const impostors = parseInt(impostorsInput.value, 10);
+        if (isNaN(totalPlayers) || totalPlayers < 3 || totalPlayers > 20) {
+          configError.textContent = "La cantidad de jugadores debe ser entre 3 y 20.";
+          return;
+        }
+        if (isNaN(impostors) || impostors < 1 || impostors >= totalPlayers) {
+          configError.textContent = "Los impostores deben ser entre 1 y jugadores-1.";
+          return;
+        }
+      }
+
+      if (configStep === 2) {
         buildNameInputs();
       }
+
+      showConfigStep(configStep + 1);
+    });
+
+    prevStepBtn.addEventListener("click", () => {
+      configError.textContent = "";
+      showConfigStep(configStep - 1);
     });
 
     startBtn.addEventListener("click", startGame);
@@ -813,6 +1339,7 @@
 
       const totalPlayers = parseInt(playersInput.value, 10);
       const impostors = parseInt(impostorsInput.value, 10);
+      const category = categorySelect.value;
       const mode = modeSelect.value;
       const customWordRaw = customWordInput.value.trim();
 
@@ -844,11 +1371,15 @@
         // similar-word: impostor ve palabra relacionada
         if (customWordRaw !== "") {
           crewWord = customWordRaw;
-          const pair = pickRandom(wordPairs);
+          const candidates = wordPairs
+            .filter(p => p.category === category || category === "random")
+            .filter(p => p.crew.toLowerCase() !== customWordRaw.toLowerCase())
+            .filter(p => p.impostor.toLowerCase() !== customWordRaw.toLowerCase());
+          const pair = candidates.length > 0 ? pickRandom(candidates) : pickRandom(wordPairs);
           impostorWord = pair.impostor;
-          // No guardamos en historial porque la palabra principal es custom
+          // No guardamos crewWord en historial porque es custom
         } else {
-          const pair = getNextPair();
+          const pair = getNextPair(category);
           crewWord = pair.crew;
           impostorWord = pair.impostor;
         }
@@ -868,6 +1399,7 @@
 
       // Guardar en el estado
       state.totalPlayers = totalPlayers;
+      playChipSound();
       state.impostors = impostors;
       state.mode = mode;
       state.crewWord = crewWord;
@@ -955,6 +1487,8 @@
       }
 
       actionBtn.textContent = "Listo, ocultar";
+      playRevealSound();
+      launchConfetti();
     }
 
     function goToNextPlayerOrEnd() {
@@ -1019,6 +1553,8 @@
       configError.textContent = "";
       configScreen.style.display = "block";
       gameScreen.style.display = "none";
+      namesInputsContainer.innerHTML = "";
+      showConfigStep(1);
 
       // Los inputs quedan como estaban para armar rápido otra partida
     }
