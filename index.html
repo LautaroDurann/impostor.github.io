@@ -41,7 +41,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 16px 16px 60px;
       font-family: "Söhne", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -664,6 +664,24 @@
       font-weight: 500;
     }
 
+    .page-footer {
+      position: fixed;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.75);
+      letter-spacing: 0.03em;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .page-footer strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     .names-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -830,6 +848,7 @@
               <option value="personajes">Personajes</option>
               <option value="animales">Animales</option>
               <option value="tecnologia">Tecnología</option>
+              <option value="cristiano">Cristiano</option>
             </select>
           </div>
           <div style="margin-top: 10px;">
@@ -855,6 +874,7 @@
             <span class="pill">🌎 lugares</span>
             <span class="pill">🎮 aleatorio</span>
             <span class="pill">👤 personajes</span>
+            <span class="pill">✝️ cristiano</span>
           </div>
         </div>
 
@@ -925,6 +945,10 @@
     </div>
   </div>
 
+  <div class="page-footer">
+    © 2026 Lautaro Emmanuel Durán Forlin
+  </div>
+
   <script>
     // --- Palabras predefinidas ---
     const wordPairs = [
@@ -937,6 +961,18 @@
       { crew: "Empanada", impostor: "Arepa", category: "comida" },
       { crew: "Café", impostor: "Mate", category: "comida" },
       { crew: "Té", impostor: "Chocolate", category: "comida" },
+      { crew: "Torta", impostor: "Pastel", category: "comida" },
+      { crew: "Galleta", impostor: "Alfajor", category: "comida" },
+      { crew: "Pan", impostor: "Tostada", category: "comida" },
+      { crew: "Queso", impostor: "Jamón", category: "comida" },
+      { crew: "Crema", impostor: "Manteca", category: "comida" },
+      { crew: "Ensalada", impostor: "Wrap", category: "comida" },
+      { crew: "Ceviche", impostor: "Tacos", category: "comida" },
+      { crew: "Milanesa", impostor: "Pollo", category: "comida" },
+      { crew: "Sopa", impostor: "Guiso", category: "comida" },
+      { crew: "Flan", impostor: "Panna cotta", category: "comida" },
+      { crew: "Uva", impostor: "Fresa", category: "comida" },
+      { crew: "Agua", impostor: "Jugo", category: "comida" },
 
       // lugares
       { crew: "Playa", impostor: "Piscina", category: "lugares" },
@@ -945,6 +981,20 @@
       { crew: "Aeropuerto", impostor: "Estación de tren", category: "lugares" },
       { crew: "Universidad", impostor: "Escuela", category: "lugares" },
       { crew: "Museo", impostor: "Galería", category: "lugares" },
+      { crew: "Parque", impostor: "Jardín", category: "lugares" },
+      { crew: "Teatro", impostor: "Cine", category: "lugares" },
+      { crew: "Iglesia", impostor: "Catedral", category: "lugares" },
+      { crew: "Estadio", impostor: "Arena", category: "lugares" },
+      { crew: "Hospital", impostor: "Clínica", category: "lugares" },
+      { crew: "Biblioteca", impostor: "Librería", category: "lugares" },
+      { crew: "Bosque", impostor: "Jungla", category: "lugares" },
+      { crew: "Isla", impostor: "Archipiélago", category: "lugares" },
+      { crew: "Puerto", impostor: "Muelle", category: "lugares" },
+      { crew: "Río", impostor: "Lago", category: "lugares" },
+      { crew: "Desierto", impostor: "Sabana", category: "lugares" },
+      { crew: "Plaza", impostor: "Avenida", category: "lugares" },
+      { crew: "Palacio", impostor: "Castillo", category: "lugares" },
+      { crew: "Hotel", impostor: "Hostal", category: "lugares" },
 
       // objetos
       { crew: "Celular", impostor: "Tablet", category: "objetos" },
@@ -953,6 +1003,20 @@
       { crew: "Reloj", impostor: "Alarma", category: "objetos" },
       { crew: "Lámpara", impostor: "Faro", category: "objetos" },
       { crew: "Teclado", impostor: "Mouse", category: "objetos" },
+      { crew: "Libro", impostor: "Agenda", category: "objetos" },
+      { crew: "Llave", impostor: "Cerradura", category: "objetos" },
+      { crew: "Mochila", impostor: "Bolso", category: "objetos" },
+      { crew: "Zapato", impostor: "Bota", category: "objetos" },
+      { crew: "Camisa", impostor: "Pantalón", category: "objetos" },
+      { crew: "Copa", impostor: "Vaso", category: "objetos" },
+      { crew: "Cepillo", impostor: "Peine", category: "objetos" },
+      { crew: "Bolígrafo", impostor: "Marcador", category: "objetos" },
+      { crew: "Gafas", impostor: "Lentillas", category: "objetos" },
+      { crew: "Bicicleta", impostor: "Patineta", category: "objetos" },
+      { crew: "Taza", impostor: "Plato", category: "objetos" },
+      { crew: "Cámara", impostor: "Video", category: "objetos" },
+      { crew: "Altavoz", impostor: "Micrófono", category: "objetos" },
+      { crew: "Sombrero", impostor: "Gorra", category: "objetos" },
 
       // personajes
       { crew: "Messi", impostor: "Ronaldo", category: "personajes" },
@@ -960,6 +1024,21 @@
       { crew: "Doctor", impostor: "Enfermero", category: "personajes" },
       { crew: "Sherlock", impostor: "Watson", category: "personajes" },
       { crew: "Mickey", impostor: "Donald", category: "personajes" },
+      { crew: "Harry", impostor: "Ron", category: "personajes" },
+      { crew: "Elsa", impostor: "Anna", category: "personajes" },
+      { crew: "Rey", impostor: "Reina", category: "personajes" },
+      { crew: "Pirata", impostor: "Marino", category: "personajes" },
+      { crew: "Soldado", impostor: "General", category: "personajes" },
+      { crew: "Chef", impostor: "Barista", category: "personajes" },
+      { crew: "Actor", impostor: "Director", category: "personajes" },
+      { crew: "Científico", impostor: "Profesor", category: "personajes" },
+      { crew: "Artista", impostor: "Músico", category: "personajes" },
+      { crew: "Policía", impostor: "Bombero", category: "personajes" },
+      { crew: "Maestro", impostor: "Alumno", category: "personajes" },
+      { crew: "Piloto", impostor: "Astronauta", category: "personajes" },
+      { crew: "Cantante", impostor: "Baterista", category: "personajes" },
+      { crew: "Chef", impostor: "Pastelero", category: "personajes" },
+      { crew: "Fotógrafo", impostor: "Periodista", category: "personajes" },
 
       // animales
       { crew: "Perro", impostor: "Lobo", category: "animales" },
@@ -967,13 +1046,65 @@
       { crew: "Ave", impostor: "Pájaro", category: "animales" },
       { crew: "Tigre", impostor: "León", category: "animales" },
       { crew: "Caballo", impostor: "Burro", category: "animales" },
+      { crew: "Elefante", impostor: "Rinoceronte", category: "animales" },
+      { crew: "Mono", impostor: "Gorila", category: "animales" },
+      { crew: "Oso", impostor: "Koala", category: "animales" },
+      { crew: "Delfín", impostor: "Ballena", category: "animales" },
+      { crew: "Serpiente", impostor: "Cocodrilo", category: "animales" },
+      { crew: "Jirafa", impostor: "Ñu", category: "animales" },
+      { crew: "Cangrejo", impostor: "Langosta", category: "animales" },
+      { crew: "Rana", impostor: "Sapo", category: "animales" },
+      { crew: "Cebra", impostor: "Antílope", category: "animales" },
+      { crew: "Gallo", impostor: "Pavo", category: "animales" },
+      { crew: "Abeja", impostor: "Mariposa", category: "animales" },
+      { crew: "Tortuga", impostor: "Caimán", category: "animales" },
+      { crew: "Camello", impostor: "Llama", category: "animales" },
+      { crew: "Foca", impostor: "Morsa", category: "animales" },
+      { crew: "Cisne", impostor: "Pato", category: "animales" },
 
       // tecnología
       { crew: "Computadora", impostor: "Laptop", category: "tecnologia" },
       { crew: "Auriculares", impostor: "Parlantes", category: "tecnologia" },
       { crew: "Robot", impostor: "Dron", category: "tecnologia" },
       { crew: "Impresora", impostor: "Escáner", category: "tecnologia" },
-      { crew: "Consola", impostor: "Control", category: "tecnologia" }
+      { crew: "Consola", impostor: "Control", category: "tecnologia" },
+      { crew: "Pantalla", impostor: "Monitor", category: "tecnologia" },
+      { crew: "Cable", impostor: "Adaptador", category: "tecnologia" },
+      { crew: "Router", impostor: "Modem", category: "tecnologia" },
+      { crew: "Teléfono", impostor: "Cámara", category: "tecnologia" },
+      { crew: "Tablet", impostor: "Ereader", category: "tecnologia" },
+      { crew: "Smartwatch", impostor: "Pulsera", category: "tecnologia" },
+      { crew: "Batería", impostor: "Cargador", category: "tecnologia" },
+      { crew: "Memoria", impostor: "Disco", category: "tecnologia" },
+      { crew: "Software", impostor: "App", category: "tecnologia" },
+      { crew: "Sitio web", impostor: "Servidor", category: "tecnologia" },
+      { crew: "Cámara", impostor: "Webcam", category: "tecnologia" },
+      { crew: "Microchip", impostor: "Procesador", category: "tecnologia" },
+      { crew: "Antena", impostor: "Satelite", category: "tecnologia" },
+      { crew: "Joystick", impostor: "Pad", category: "tecnologia" },
+      { crew: "Sensor", impostor: "Radar", category: "tecnologia" },
+
+      // cristiano
+      { crew: "Jesús", impostor: "Nazaret", category: "cristiano" },
+      { crew: "María", impostor: "Ángel Gabriel", category: "cristiano" },
+      { crew: "Pablo", impostor: "Apóstol", category: "cristiano" },
+      { crew: "David", impostor: "Goliat", category: "cristiano" },
+      { crew: "Pastor", impostor: "Alabanza", category: "cristiano" },
+      { crew: "Biblia", impostor: "Evangelio", category: "cristiano" },
+      { crew: "José", impostor: "Establo", category: "cristiano" },
+      { crew: "Pedro", impostor: "Judas", category: "cristiano" },
+      { crew: "Adán", impostor: "Eva", category: "cristiano" },
+      { crew: "Arca", impostor: "Noé", category: "cristiano" },
+      { crew: "Cruz", impostor: "Sermón", category: "cristiano" },
+      { crew: "Gloria", impostor: "Gracia", category: "cristiano" },
+      { crew: "Fe", impostor: "Esperanza", category: "cristiano" },
+      { crew: "Salmo", impostor: "Coral", category: "cristiano" },
+      { crew: "Ángel", impostor: "Santo", category: "cristiano" },
+      { crew: "Iglesia", impostor: "Capilla", category: "cristiano" },
+      { crew: "Culto", impostor: "Predicador", category: "cristiano" },
+      { crew: "Oración", impostor: "Devoción", category: "cristiano" },
+      { crew: "Bautismo", impostor: "Adoración", category: "cristiano" },
+      { crew: "Milagro", impostor: "Profeta", category: "cristiano" }
     ];
 
     const singleWords = [
@@ -1565,5 +1696,3 @@
   </script>
 </body>
 </html>
-
-
